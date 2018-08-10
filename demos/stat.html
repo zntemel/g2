@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="geometry" content="line">
+  <link rel="stylesheet" href="./assets/common.css">
+  <title>State Driven Charts</title>
+</head>
+<body>
+<div id="mountNode"></div>
+<script src="./assets/data-set.min.js"></script>
+<script src="../build/g2.js"></script>
+<script>
+  const data = [
+    { gender: 'male', jobCat: 'A', salary: 10000 },
+    { gender: 'male', jobCat: 'B', salary: 10000 },
+    { gender: 'male', jobCat: 'A', salary: 34400 },
+    { gender: 'male', jobCat: 'A', salary: 12000 },
+    { gender: 'male', jobCat: 'A', salary: 11111 },
+    { gender: 'male', jobCat: 'B', salary: 10000 },
+    { gender: 'female', jobCat: 'A', salary: 12333 },
+    { gender: 'female', jobCat: 'A', salary: 14000 },
+    { gender: 'female', jobCat: 'A', salary: 23400 },
+    { gender: 'female', jobCat: 'B', salary: 30000 },
+    { gender: 'female', jobCat: 'B', salary: 14000 },
+    { gender: 'female', jobCat: 'B', salary: 10030 },
+    { gender: 'female', jobCat: 'C', salary: 22222 }
+  ];
+
+  const chart = new G2.Chart({
+    animate: false,
+    container: 'mountNode',
+    height: 400
+  });
+  chart.source(data)
+    .stat({
+      type: 'aggregate',
+      operations: [ 'mean' ], // 求均值
+      fields: [ 'salary' ],
+      groupBy: [ 'gender', 'jobCat' ],
+      as: [ 'mean' ]
+    });
+  chart.interval()
+    .position('gender*mean', 'dodge')
+    .color('gender');
+
+  // console.log(chart);
+
+  chart.render();
+</script>
+</body>
+</html>

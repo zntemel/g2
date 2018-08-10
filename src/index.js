@@ -18,4 +18,7 @@ require('./facet/index');
 // interaction
 require('./interaction/index');
 
+// stat
+// require('./stat/index');
+
 module.exports = G2;

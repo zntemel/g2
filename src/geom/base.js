@@ -480,6 +480,7 @@ class GeomBase extends Base {
   // step 1: init attrs
   _initAttrs() {
     const self = this;
+    // const view = self.get('view');
     const attrs = this.get('attrs');
     const attrOptions = this.get('attrOptions');
     const coord = self.get('coord');
@@ -502,6 +503,11 @@ class GeomBase extends Base {
         const scales = [];
         for (let i = 0; i < fields.length; i++) {
           const field = fields[i];
+          // let field2createScale = field;
+          // if (view._statFields && view._statFields[field]) {
+          //   field2createScale = view._statFields[field].originField;
+          // }
+          // const scale = self._createScale(field2createScale);
           const scale = self._createScale(field);
           if (type === 'color' && Util.isNil(option.values)) { // 设置 color 的默认色值
             if (scale.values.length <= 8) {

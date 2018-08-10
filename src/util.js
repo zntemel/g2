@@ -12,31 +12,8 @@ const Util = CommonUtil.assign({
   MatrixUtil: G.MatrixUtil,
   PathUtil: G.PathUtil,
   cloneDeep: Utils.clone,
-  deepMix: Utils.deepMix,
-  filter: Utils.filter,
-  flatten: Utils.flatten,
-  getWrapBehavior: Utils.getWrapBehavior,
-  groupBy: Utils.groupBy,
-  indexOf: Utils.indexOf,
-  isDate: Utils.isDate,
-  isEmpty: Utils.isEmpty,
-  isEqualWith: Utils.isEqualWith,
   isFinite,
   isNaN,
-  isNull: Utils.isNull,
-  isPlainObject: Utils.isPlainObject,
-  lowerFirst: Utils.lowerFirst,
-  map: Utils.map,
-  maxBy: Utils.maxBy,
-  minBy: Utils.minBy,
-  mix: Utils.mix,
-  pick: Utils.pick,
-  reduce: Utils.reduce,
-  substitute: Utils.substitute,
-  union: Utils.union,
-  uniq: Utils.uniq,
-  upperCase: Utils.upperCase,
-  wrapBehavior: Utils.wrapBehavior,
   snapEqual(v1, v2) {
     return Math.abs(v1 - v2) < 0.001;
   },
@@ -67,16 +44,35 @@ const Util = CommonUtil.assign({
     }
     return [ top, right, bottom, left ];
   }
-}, CommonUtil);
+}, Utils, CommonUtil);
 
 Util.Array = {
   groupToMap: Utils.groupToMap,
   group: Utils.group,
   merge: Utils.merge,
-  values: Utils.values,
   getRange: Utils.getRange,
   firstValue: Utils.firstValue,
-  remove: CommonUtil.remove
+  remove: CommonUtil.remove,
+  values(data, name) {
+    const rst = [];
+    const tmpMap = {};
+    for (let i = 0; i < data.length; i++) {
+      const obj = data[i];
+      let value = obj[name];
+      if (!Util.isNil(value)) {
+        if (!Util.isArray(value)) {
+          value = [ value ];
+        }
+        Util.each(value, val => {
+          if (!tmpMap[val]) {
+            rst.push(val);
+            tmpMap[val] = true;
+          }
+        });
+      }
+    }
+    return rst;
+  }
 };
 
 module.exports = Util;
