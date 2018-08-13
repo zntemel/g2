@@ -14,19 +14,12 @@
 <script src="../build/g2.js"></script>
 <script>
   const data = [
-    { gender: 'male', jobCat: 'A', salary: 10000 },
-    { gender: 'male', jobCat: 'B', salary: 10000 },
-    { gender: 'male', jobCat: 'A', salary: 34400 },
-    { gender: 'male', jobCat: 'A', salary: 12000 },
-    { gender: 'male', jobCat: 'A', salary: 11111 },
-    { gender: 'male', jobCat: 'B', salary: 10000 },
-    { gender: 'female', jobCat: 'A', salary: 12333 },
-    { gender: 'female', jobCat: 'A', salary: 14000 },
-    { gender: 'female', jobCat: 'A', salary: 23400 },
-    { gender: 'female', jobCat: 'B', salary: 30000 },
-    { gender: 'female', jobCat: 'B', salary: 14000 },
-    { gender: 'female', jobCat: 'B', salary: 10030 },
-    { gender: 'female', jobCat: 'C', salary: 22222 }
+    { jobCat: 'A', salary: 10000 },
+    { jobCat: 'A', salary: 34400 },
+    { jobCat: 'A', salary: 12000 },
+    { jobCat: 'A', salary: 11111 },
+    { jobCat: 'B', salary: 10000 },
+    { jobCat: 'B', salary: 10000 }
   ];
 
   const chart = new G2.Chart({
@@ -39,12 +32,12 @@
       type: 'aggregate',
       operations: [ 'mean' ], // 求均值
       fields: [ 'salary' ],
-      groupBy: [ 'gender', 'jobCat' ],
+      groupBy: [ 'jobCat' ],
       as: [ 'mean' ]
     });
   chart.interval()
-    .position('gender*mean', 'dodge')
-    .color('gender');
+    .position('jobCat*mean')
+    .color('jobCat');
 
   // console.log(chart);
 
