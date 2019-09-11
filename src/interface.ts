@@ -14,4 +14,4 @@ export interface Point {
   readonly y: number;
 }
 
-export type Padding = number | number[] | string;
+export type Padding = number | number[];
